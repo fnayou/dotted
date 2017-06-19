@@ -1,0 +1,8 @@
+# development files
+/.editorconfig    export-ignore
+/.gitattributes   export-ignore
+/.gitignore       export-ignore
+/.standards       export-ignore
+/.php_cs          export-ignore
+/.scrutinizer.yml export-ignore
+/phpunit.xml.dist export-ignore
