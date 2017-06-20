@@ -46,7 +46,7 @@ next you can *check*, *access* or *insert* values with ease.
         ]
     ];
 
-    $dotted = new Dotted();
+    $dotted = new Dotted($content);
     // or
     $dotted = Dotted::create($content);
 
