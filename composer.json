@@ -1,0 +1,51 @@
+{
+    "name": "fnayou/dotted",
+    "type": "library",
+    "description": "php library to access multidimensional arrays",
+    "keywords": [
+        "php",
+        "array",
+        "multidimensional",
+        "dotted",
+        "notation"
+    ],
+    "homepage": "https://github.com/fnayou/dotted",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aymen FNAYOU",
+            "email": "fnayou.aymen@gmail.com",
+            "homepage": "http://aymen-fnayou.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+        "escapestudios/symfony2-coding-standard": "^2.10",
+        "fnayou/standards": "^1.2",
+        "friendsofphp/php-cs-fixer": "^2.3",
+        "phpunit/phpunit": "^5.1",
+        "symfony/var-dumper": "^3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fnayou\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fnayou\\": "tests"
+        },
+        "files": [ "vendor/symfony/var-dumper/Resources/functions/dump.php" ]
+    },
+    "extra": {
+        "branch-alias" : {
+            "dev-master" : "1.0.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
