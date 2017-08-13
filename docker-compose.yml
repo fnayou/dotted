@@ -1,0 +1,30 @@
+##
+# This file is part of the fnayou/dotted package.
+#
+# Copyright (c) 2016. Aymen FNAYOU <fnayou.aymen@gmail.com>
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+##
+
+version: '2'
+services:
+    # nginx container
+    nginx:
+        image: nginx
+        ports:
+            - "8080:80"
+        volumes_from:
+            - php
+        volumes:
+            - ./docker/nginx/nginx.conf:/nginx.conf
+            - ./docker/logs/nginx:/var/log/nginx
+        command: nginx -c /nginx.conf
+    # php container
+    php:
+        build:
+            context: docker/php
+        ports:
+            - "9000:9000"
+        volumes:
+            - .:/var/www/html

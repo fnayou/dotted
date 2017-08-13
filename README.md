@@ -4,9 +4,10 @@ Dotted
 <img src="http://data.aymen-fnayou.com/dotted_logo.png" width="120px" align="left"/>
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fnayou/dotted/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fnayou/dotted/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/fnayou/dotted/badges/build.png?b=master)](https://scrutinizer-ci.com/g/fnayou/dotted/build-status/master)
+[![Build Status](https://travis-ci.org/fnayou/dotted.svg?branch=master)](https://travis-ci.org/fnayou/dotted)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/d322f96e-af47-4d90-ac5b-439f71815ee3/mini.png)](https://insight.sensiolabs.com/projects/d322f96e-af47-4d90-ac5b-439f71815ee3)
 [![Version](http://img.shields.io/packagist/v/fnayou/dotted.svg?style=flat)](https://packagist.org/packages/fnayou/dotted)
+[![Build Status](https://scrutinizer-ci.com/g/fnayou/dotted/badges/build.png?b=master)](https://scrutinizer-ci.com/g/fnayou/dotted/build-status/master)
 
 **Dotted** is a PHP library to manage *multidimensional arrays* !
 
@@ -105,14 +106,12 @@ next you can *check*, *access* or *insert* values with ease.
 
 ## Credits
 
-- [Aymen FNAYOU][link-author] - [GitLab][link-author-gitlab] - [GitHub][link-author-github]
+[Aymen FNAYOU][link-author]
 
 ## License
 
 ![license](https://img.shields.io/badge/license-MIT-lightgrey.svg) Please see [License File](LICENSE.md) for more information.
 
 [link-author]: https://aymen-fnayou.com
-[link-author-gitlab]: https://gitlab.com/fnayou
-[link-author-github]: https://github.com/fnayou
 [link-composer]: https://getcomposer.org/
 [link-release]: https://github.com/fnayou/dotted/releases
