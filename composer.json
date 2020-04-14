@@ -20,14 +20,13 @@
         }
     ],
     "require": {
-
     },
     "require-dev": {
-        "escapestudios/symfony2-coding-standard": "^2.10",
-        "fnayou/standards": "^1.2",
-        "friendsofphp/php-cs-fixer": "^2.3",
-        "phpunit/phpunit": "^5.1",
-        "symfony/var-dumper": "^3.3"
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12.18",
+        "phpunit/phpunit": "^9.1",
+        "symfony/var-dumper": "^5.0"
     },
     "autoload": {
         "psr-4": {

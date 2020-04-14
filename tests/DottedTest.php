@@ -10,13 +10,16 @@
 
 namespace Fnayou;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class DotNotationTest.
  */
-class DottedTest extends \PHPUnit_Framework_TestCase
+class DottedTest extends TestCase
 {
     /**
      * test constructor.
+     * @throws \ReflectionException
      */
     public function testConstructor()
     {
@@ -30,7 +33,8 @@ class DottedTest extends \PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo(FakeParameters::getBaseArrayContent())
             )
-            ->willReturn($this->returnSelf());
+//            ->willReturn($this->returnSelf())
+        ;
 
         $reflectionClass = new \ReflectionClass($classname);
         $constructor = $reflectionClass->getConstructor();
@@ -142,7 +146,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     {
         $classname = Dotted::class;
         $mock = $this->getMockBuilder($classname)
-            ->setMethods(['explode'])
+            ->onlyMethods(['explode'])
             ->setConstructorArgs([FakeParameters::getBaseArrayContent()])
             ->getMock();
 
@@ -209,7 +213,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
 
         $classname = Dotted::class;
         $mock = $this->getMockBuilder($classname)
-            ->setMethods(['explode'])
+            ->onlyMethods(['explode'])
             ->setConstructorArgs([$baseContent])
             ->getMock();
 
