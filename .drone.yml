@@ -2,7 +2,7 @@ kind: pipeline
 name: default
 
 steps:
-    - name: install
+    - name: test
       image: composer
       commands:
           - composer install --prefer-source --no-interaction
