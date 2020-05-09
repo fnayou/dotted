@@ -1,23 +1,25 @@
-#kind: pipeline
-#name: default
-#
-#steps:
-#    - name: test
-#      image: composer
-#      commands:
-#          - composer install --prefer-source --no-interaction
-name: ditted pipeline
+name: dotted pipline
 kind: pipeline
 type: docker
 
 steps:
     - name: test
-      image: plugins/docker
-      dockerfile: ./docker/php/Dockerfile
+      image: composer
       commands:
           - composer install --prefer-source --no-interaction
           - ./vendor/bin/php-cs-fixer fix --dry-run --verbose --diff --ansi
-trigger:
-    event:
-        - push
-        - pull_request
+#name: ditted pipeline
+#kind: pipeline
+#type: docker
+#
+#steps:
+#    - name: test
+#      image: plugins/docker
+#      dockerfile: ./docker/php/Dockerfile
+#      commands:
+#          - composer install --prefer-source --no-interaction
+#          - ./vendor/bin/php-cs-fixer fix --dry-run --verbose --diff --ansi
+#trigger:
+#    event:
+#        - push
+#        - pull_request
