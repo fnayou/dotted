@@ -1,7 +1,7 @@
 Dotted
 ======
 
-<img src="http://data.aymen-fnayou.com/dotted_logo.png" width="120px" align="left"/>
+<img src="https://cloud.aymen.fr/s/REwbdAwHXyoDfSH/download" width="120px" align="left"/>
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fnayou/dotted/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fnayou/dotted/?branch=master)
 [![Build Status](https://travis-ci.org/fnayou/dotted.svg?branch=master)](https://travis-ci.org/fnayou/dotted)
