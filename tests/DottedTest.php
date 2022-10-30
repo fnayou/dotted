@@ -10,15 +10,19 @@
 
 namespace Fnayou;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class DotNotationTest.
  */
-class DottedTest extends \PHPUnit_Framework_TestCase
+class DottedTest extends TestCase
 {
     /**
      * test constructor.
+     *
+     * @throws \ReflectionException
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $classname = Dotted::class;
         $mock = $this->getMockBuilder($classname)
@@ -30,7 +34,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo(FakeParameters::getBaseArrayContent())
             )
-            ->willReturn($this->returnSelf());
+        ;
 
         $reflectionClass = new \ReflectionClass($classname);
         $constructor = $reflectionClass->getConstructor();
@@ -40,7 +44,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test static method create.
      */
-    public function testStaticCreate()
+    public function testStaticCreate(): void
     {
         $content = FakeParameters::getBaseArrayContent();
         $apiError = Dotted::create($content);
@@ -50,7 +54,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test getValues should success.
      */
-    public function testGetValuesShouldSuccess()
+    public function testGetValuesShouldSuccess(): void
     {
         $content = FakeParameters::getBaseArrayContent();
         $dotted = new Dotted($content);
@@ -61,7 +65,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test get should success.
      */
-    public function testGetShouldSuccess()
+    public function testGetShouldSuccess(): void
     {
         $content = FakeParameters::getBaseArrayContent();
         $dotted = new Dotted($content);
@@ -80,7 +84,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test get with unique path should success.
      */
-    public function testGetUniqueShouldSuccess()
+    public function testGetUniqueShouldSuccess(): void
     {
         $content = FakeParameters::getBaseArrayContent();
 
@@ -103,7 +107,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test get fake path should return null.
      */
-    public function testGetFakeShouldReturnNull()
+    public function testGetFakeShouldReturnNull(): void
     {
         $content = FakeParameters::getBaseArrayContent();
         $dotted = new Dotted($content);
@@ -114,7 +118,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test get fake path with default should return default.
      */
-    public function testGetFakeWithDefaultShouldReturnDefault()
+    public function testGetFakeWithDefaultShouldReturnDefault(): void
     {
         $content = FakeParameters::getBaseArrayContent();
         $dotted = new Dotted($content);
@@ -126,7 +130,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test get without path should throw exception.
      */
-    public function testGetWithoutPathShouldFail()
+    public function testGetWithoutPathShouldFail(): void
     {
         $content = FakeParameters::getBaseArrayContent();
         $dotted = new Dotted($content);
@@ -138,11 +142,11 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test get with unique path should return true.
      */
-    public function testHasUniqueShouldReturnTrue()
+    public function testHasUniqueShouldReturnTrue(): void
     {
         $classname = Dotted::class;
         $mock = $this->getMockBuilder($classname)
-            ->setMethods(['explode'])
+            ->onlyMethods(['explode'])
             ->setConstructorArgs([FakeParameters::getBaseArrayContent()])
             ->getMock();
 
@@ -159,7 +163,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test get with unique with fake path should return false.
      */
-    public function testHasUniqueWithFakeShouldReturnFalse()
+    public function testHasUniqueWithFakeShouldReturnFalse(): void
     {
         $content = FakeParameters::getBaseArrayContent();
 
@@ -182,7 +186,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test set should success.
      */
-    public function testSetShouldSuccess()
+    public function testSetShouldSuccess(): void
     {
         $baseContent = FakeParameters::getBaseArrayContent();
         $newContent = FakeParameters::getNewArrayContent();
@@ -191,25 +195,27 @@ class DottedTest extends \PHPUnit_Framework_TestCase
         $dotted->set('key9', $newContent['key9']);
         $dotted->set('key10', $newContent['key10']);
         $dotted->set('key11', $newContent['key11']);
+        $dotted->set('key12', $newContent['key12']);
         $dotted->set('key13', $newContent['key13']);
 
         $this->assertSame($newContent['key9'], $dotted->get('key9'));
         $this->assertSame($newContent['key10'], $dotted->get('key10'));
-        $this->assertSame($newContent['key11'][0], $dotted->get('key11.0'));
-        $this->assertSame($newContent['key11'][1], $dotted->get('key11.1'));
+        $this->assertSame($newContent['key11'], $dotted->get('key11'));
+        $this->assertSame($newContent['key12'][0], $dotted->get('key12.0'));
+        $this->assertSame($newContent['key12'][1], $dotted->get('key12.1'));
         $this->assertSame($newContent['key13']['key14'], $dotted->get('key13.key14'));
     }
 
     /**
      * test set with unique path should success.
      */
-    public function testSetUniqueShouldSuccess()
+    public function testSetUniqueShouldSuccess(): void
     {
         $baseContent = FakeParameters::getBaseArrayContent();
 
         $classname = Dotted::class;
         $mock = $this->getMockBuilder($classname)
-            ->setMethods(['explode'])
+            ->onlyMethods(['explode'])
             ->setConstructorArgs([$baseContent])
             ->getMock();
 
@@ -230,7 +236,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test set without path should throw exception.
      */
-    public function testSetWithoutPathShouldFail()
+    public function testSetWithoutPathShouldFail(): void
     {
         $content = FakeParameters::getBaseArrayContent();
         $dotted = new Dotted($content);
@@ -242,7 +248,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test set with not array path should throw exception.
      */
-    public function testSetWithNotArrayPathShouldFail()
+    public function testSetWithNotArrayPathShouldFail(): void
     {
         $content = FakeParameters::getBaseArrayContent();
         $dotted = new Dotted($content);
@@ -254,7 +260,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test set with override should success.
      */
-    public function testSetWithOverrideShouldSuccess()
+    public function testSetWithOverrideShouldSuccess(): void
     {
         $content = FakeParameters::getBaseArrayContent();
         $dotted = new Dotted($content);
@@ -267,7 +273,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test add should success.
      */
-    public function testAddShouldSuccess()
+    public function testAddShouldSuccess(): void
     {
         $baseContent = FakeParameters::getBaseArrayContent();
 
@@ -281,7 +287,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test add with unique path should success.
      */
-    public function testAddUniqueShouldSuccess()
+    public function testAddUniqueShouldSuccess(): void
     {
         $baseContent = FakeParameters::getBaseArrayContent();
 
@@ -308,7 +314,7 @@ class DottedTest extends \PHPUnit_Framework_TestCase
     /**
      * test add with unique path should success.
      */
-    public function testFlattenUniqueShouldSuccess()
+    public function testFlattenUniqueShouldSuccess(): void
     {
         $baseContent = FakeParameters::getBaseArrayContent();
 

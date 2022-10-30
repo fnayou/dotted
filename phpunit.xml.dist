@@ -10,7 +10,8 @@
 
 <phpunit bootstrap="tests/bootstrap.php"
          colors="true"
-         backupGlobals="false">
+         backupGlobals="false"
+         cacheResult ="false">
 
     <testsuites>
         <testsuite name="Dotted Test Suite">

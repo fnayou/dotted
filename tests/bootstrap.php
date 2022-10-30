@@ -1,13 +1,13 @@
 <?php
 
-ini_set('display_errors', true);
+ini_set('display_errors', '1');
 
-error_reporting(E_ALL);
+error_reporting(\E_ALL);
 
 $autoloadPath = __DIR__.'/../vendor/autoload.php';
 
 if (!file_exists($autoloadPath)) {
-    die('File autoload.php not found. Run \'composer install\' command.');
+    exit('File autoload.php not found. Run \'composer install\' command.');
 }
 
 require $autoloadPath;
