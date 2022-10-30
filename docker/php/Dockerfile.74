@@ -1,0 +1,15 @@
+FROM php:7.4-alpine
+
+LABEL maintainer="fnayou.aymen@gmail.com"
+
+# Global dependencies
+RUN apk add --no-cache \
+    git \
+    zip \
+    unzip
+
+# configure php.ini
+RUN echo "memory_limit = -1;" >> /usr/local/etc/php/conf.d/php.ini
+
+# composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer

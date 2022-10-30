@@ -1,13 +1,11 @@
 Dotted
 ======
 
-<img src="https://cloud.aymen.fr/s/REwbdAwHXyoDfSH/download" width="120px" align="left"/>
+<img src="https://cloud.aymen.fr/s/bqQjwjFrjQ2JtCQ/download" width="120px" align="left"/>
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fnayou/dotted/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fnayou/dotted/?branch=master)
-[![Build Status](https://travis-ci.org/fnayou/dotted.svg?branch=master)](https://travis-ci.org/fnayou/dotted)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/d322f96e-af47-4d90-ac5b-439f71815ee3/mini.png)](https://insight.sensiolabs.com/projects/d322f96e-af47-4d90-ac5b-439f71815ee3)
 [![Version](http://img.shields.io/packagist/v/fnayou/dotted.svg?style=flat)](https://packagist.org/packages/fnayou/dotted)
-[![Build Status](https://scrutinizer-ci.com/g/fnayou/dotted/badges/build.png?b=master)](https://scrutinizer-ci.com/g/fnayou/dotted/build-status/master)
+[![Build Status](https://drone.aymen.fr/api/badges/fnayou/dotted/status.svg)](https://drone.aymen.fr/fnayou/dotted)
 
 **Dotted** is a PHP library to manage *multidimensional arrays* !
 
@@ -23,6 +21,11 @@ $ php composer.phar require fnayou/dotted
 
 or [download the latest release][link-release] and include `src/Dotted.php` in your project.
 
+## Compatibility
+
+after the last changes. **Dotted** is only compatible with `>= PHP 7.4`
+for older versions, please use tag `1.x.x`
+
 ## Usage
 
 first, you create `dotted` object by passing the `array` content.
@@ -37,7 +40,7 @@ next you can *check*, *access* or *insert* values with ease.
     $content = [
         'keyOne' => 'valueOne',
         'keyTwo' => [
-            'keyThree' => 3, 
+            'keyThree' => 3,
             'keyFour' => false,
             'keyFive' => [
                 true,
@@ -63,7 +66,7 @@ next you can *check*, *access* or *insert* values with ease.
     // access non-existent value
     echo $dotted->get('keyTwo.keySix');                 // output : null
 
-    // access value with default value 
+    // access value with default value
     echo $dotted->get('keyTwo.keySix', 'defaultValue'); // output : defaultValue
 
     // insert value
@@ -73,9 +76,9 @@ next you can *check*, *access* or *insert* values with ease.
     // insert value with override
     $dotted->set('keyTwo.keySix', 6);                   // output : 6
 
-    // access values (array content) 
+    // access values (array content)
     $dotted->getValues();
-    /** output : 
+    /** output :
       array:2 [▼
         "keyOne" => "valueOne"
         "keyTwo" => array:3 [▼
@@ -112,6 +115,6 @@ next you can *check*, *access* or *insert* values with ease.
 
 ![license](https://img.shields.io/badge/license-MIT-lightgrey.svg) Please see [License File](LICENSE.md) for more information.
 
-[link-author]: https://aymen-fnayou.com
+[link-author]: https://github.com/fnayou
 [link-composer]: https://getcomposer.org/
 [link-release]: https://github.com/fnayou/dotted/releases

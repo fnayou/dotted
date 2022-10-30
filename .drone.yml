@@ -1,0 +1,108 @@
+---
+# 8.1 pipeline
+
+name: dotted 8.1 pipeline
+kind: pipeline
+type: docker
+
+globals:
+    - &docker_credentiels
+        username:
+            from_secret: docker_username
+        password:
+            from_secret: docker_password
+        repo: fnayou/dotted
+        purge: true
+    - &commands
+        commands:
+            - composer validate
+            - composer install --no-scripts --no-interaction --ansi
+            - ./vendor/bin/php-cs-fixer fix --dry-run --diff --ansi --using-cache=no --allow-risky=yes
+            - ./vendor/bin/phpunit
+            - ./vendor/bin/phpstan analyse --ansi
+
+steps:
+    -   name: build
+        image: plugins/docker
+        settings:
+            storage_driver: vfs
+            dockerfile: docker/php/Dockerfile.81
+            <<: *docker_credentiels
+            tags: ${DRONE_COMMIT_SHA:0:7}-${DRONE_COMMIT_BRANCH}-81
+        when:
+            branch:
+                exclude:
+                    - master
+            event:
+                - push
+                - pull_request
+    -   name: quality
+        image: fnayou/dotted:${DRONE_COMMIT_SHA:0:7}-${DRONE_COMMIT_BRANCH}-81
+        <<: *commands
+        when:
+            branch:
+                exclude:
+                    - master
+            event:
+                - push
+                - pull_request
+volumes:
+    - name: docker-cache
+      host:
+          path: /var/cache/${DRONE_REPO_NAME}/docker
+image_pull_secrets:
+    - dockerconfigjson
+
+---
+# 7.4 pipeline
+
+name: dotted 7.4 pipeline
+kind: pipeline
+type: docker
+
+globals:
+    - &docker_credentiels
+        username:
+            from_secret: docker_username
+        password:
+            from_secret: docker_password
+        repo: fnayou/dotted
+        purge: true
+    - &commands
+        commands:
+            - composer validate
+            - composer install --no-scripts --no-interaction --ansi
+            - ./vendor/bin/phpunit
+
+steps:
+    -   name: build
+        image: plugins/docker
+        settings:
+            storage_driver: vfs
+            dockerfile: docker/php/Dockerfile.74
+            <<: *docker_credentiels
+            tags: ${DRONE_COMMIT_SHA:0:7}-${DRONE_COMMIT_BRANCH}-74
+        when:
+            branch:
+                exclude:
+                    - master
+            event:
+                - push
+                - pull_request
+    -   name: quality
+        image: fnayou/dotted:${DRONE_COMMIT_SHA:0:7}-${DRONE_COMMIT_BRANCH}-74
+        <<: *commands
+        when:
+            branch:
+                exclude:
+                    - master
+            event:
+                - push
+                - pull_request
+volumes:
+    - name: docker-cache
+      host:
+          path: /var/cache/${DRONE_REPO_NAME}/docker
+image_pull_secrets:
+    - dockerconfigjson
+

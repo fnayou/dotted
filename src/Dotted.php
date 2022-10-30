@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fnayou;
 
 /**
@@ -15,53 +17,36 @@ namespace Fnayou;
  */
 class Dotted
 {
-    const SEPARATOR = '/[\.]/';
+    public const SEPARATOR = '.';
 
-    /**
-     * @var array
-     */
-    protected $values = [];
+    private array $values = [];
 
-    /**
-     * @param array $values
-     */
-    public function __construct(array $values = [])
+    final public function __construct(array $values = [])
     {
         $this->setValues($values);
     }
 
-    /**
-     * @param array $values
-     *
-     * @return \Fnayou\Dotted
-     */
-    public static function create(array $values = [])
+    public static function create(array $values = []): self
     {
         return new static($values);
     }
 
     /**
-     * @param array $values
-     *
      * @return \Fnayou\Dotted
      */
-    public function setValues(array $values)
+    public function setValues(array $values): self
     {
         $this->values = $values;
 
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getValues()
+    public function getValues(): array
     {
         return $this->values;
     }
 
     /**
-     * @param string $path
      * @param string $default
      *
      * @return mixed
@@ -87,12 +72,9 @@ class Dotted
     }
 
     /**
-     * @param string $path
-     * @param array  $values
-     *
      * @return \Fnayou\Dotted
      */
-    public function add(string $path, array $values)
+    public function add(string $path, array $values): self
     {
         $pathValues = (array) $this->get($path);
 
@@ -102,14 +84,13 @@ class Dotted
     }
 
     /**
-     * @param string $path
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @throws \InvalidArgumentException
      *
      * @return \Fnayou\Dotted
      */
-    public function set(string $path, $value)
+    public function set(string $path, $value): self
     {
         if (true === empty($path)) {
             throw new \InvalidArgumentException('"path" parameter cannot be empty.');
@@ -120,14 +101,12 @@ class Dotted
         while (0 < \count($keys)) {
             if (1 === \count($keys)) {
                 if (true === \is_array($values)) {
-                    $values[\array_shift($keys)] = $value;
+                    $values[array_shift($keys)] = $value;
                 } else {
-                    throw new \InvalidArgumentException(
-                        \sprintf('cannot set value at "path" (%s) : not array.', $path)
-                    );
+                    throw new \InvalidArgumentException(sprintf('cannot set value at "path" (%s) : not array.', $path));
                 }
             } else {
-                $key = \array_shift($keys);
+                $key = array_shift($keys);
                 if (!isset($values[$key])) {
                     $values[$key] = [];
                 }
@@ -138,12 +117,7 @@ class Dotted
         return $this;
     }
 
-    /**
-     * @param string $path
-     *
-     * @return bool
-     */
-    public function has(string $path)
+    public function has(string $path): bool
     {
         $keys = $this->explode($path);
         $values = $this->values;
@@ -160,22 +134,14 @@ class Dotted
         return true;
     }
 
-    /**
-     * @return array
-     */
-    public function flatten()
+    public function flatten(): array
     {
         return $this->arrayFlattenRecursive($this->values, null);
     }
 
-    /**
-     * @param string $path
-     *
-     * @return array
-     */
-    protected function explode(string $path)
+    public function explode(string $path): array
     {
-        return \preg_split(static::SEPARATOR, $path);
+        return explode(static::SEPARATOR, $path);
     }
 
     /**
@@ -201,17 +167,12 @@ class Dotted
      * arrayMergeRecursiveDistinct(array(0 => 'org value'), array(0 => 'new value'));
      *     => array(0 => 'org value', 1 => 'new value');
      *
-     * @param array $array1
-     * @param array $array2
-     *
-     * @return array
-     *
      * @author Daniel <daniel (at) danielsmedegaardbuus (dot) dk>
      * @author Gabriel Sobrinho <gabriel (dot) sobrinho (at) gmail (dot) com>
      * @author Anton Medvedev <anton (at) elfet (dot) ru>
      * @author Aymen Fnayou <fnayou (dot) aymen (at) gmail (dot) com>
      */
-    protected function arrayMergeRecursiveDistinct(array &$array1, array &$array2)
+    public function arrayMergeRecursiveDistinct(array &$array1, array &$array2): array
     {
         $result = $array1;
 
@@ -240,18 +201,12 @@ class Dotted
         return $result;
     }
 
-    /**
-     * @param array       $array
-     * @param string|null $parent
-     *
-     * @return array
-     */
-    protected function arrayFlattenRecursive(array $array, string $parent = null)
+    public function arrayFlattenRecursive(array $array, string $parent = null): array
     {
         $result = [];
         foreach ($array as $key => $value) {
             if (true === \is_array($value)) {
-                $result = \array_merge($result, $this->arrayFlattenRecursive($value, $key));
+                $result = array_merge($result, $this->arrayFlattenRecursive($value, $key));
 
                 continue;
             }
