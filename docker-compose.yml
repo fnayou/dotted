@@ -7,24 +7,46 @@
 # file that was distributed with this source code.
 ##
 
-version: '2'
+version: '3.7'
 services:
-    # nginx container
+    # nginx
     nginx:
+        container_name: dotted_nginx
         image: nginx
-        ports:
-            - "8080:80"
-        volumes_from:
-            - php
+        expose:
+            - "80"
         volumes:
             - ./docker/nginx/nginx.conf:/nginx.conf
             - ./docker/logs/nginx:/var/log/nginx
+            - ./:/var/www/html
+        environment:
+            - VIRTUAL_HOST=dotted.loc
+        depends_on:
+            - php
         command: nginx -c /nginx.conf
-    # php container
+        networks:
+            dotted_network:
+                ipv4_address: 172.13.10.3
+    # php
     php:
+        container_name: dotted_php
         build:
             context: docker/php
-        ports:
-            - "9000:9000"
+            dockerfile: Dockerfile
+        expose:
+            - 8000
         volumes:
-            - .:/var/www/html
+            - ./docker/bash/bash_profile:/root/.bash_profile
+            - ./docker/bash/bashrc:/root/.bashrc
+            - ./docker/bash/bash_aliases:/root/.bash_aliases
+            - ./:/var/www/html
+        working_dir: /var/www/html
+        networks:
+            dotted_network:
+                ipv4_address: 172.13.10.4
+networks:
+    dotted_network:
+        ipam:
+            driver: default
+            config:
+                - subnet: "172.13.10.0/24"

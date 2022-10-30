@@ -1,7 +1,7 @@
 Dotted
 ======
 
-<img src="https://cloud.aymen.fr/s/REwbdAwHXyoDfSH/download" width="120px" align="left"/>
+<img src="https://cloud.aymen.fr/s/bqQjwjFrjQ2JtCQ/download" width="120px" align="left"/>
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fnayou/dotted/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fnayou/dotted/?branch=master)
 [![Build Status](https://travis-ci.org/fnayou/dotted.svg?branch=master)](https://travis-ci.org/fnayou/dotted)
@@ -37,7 +37,7 @@ next you can *check*, *access* or *insert* values with ease.
     $content = [
         'keyOne' => 'valueOne',
         'keyTwo' => [
-            'keyThree' => 3, 
+            'keyThree' => 3,
             'keyFour' => false,
             'keyFive' => [
                 true,
@@ -63,7 +63,7 @@ next you can *check*, *access* or *insert* values with ease.
     // access non-existent value
     echo $dotted->get('keyTwo.keySix');                 // output : null
 
-    // access value with default value 
+    // access value with default value
     echo $dotted->get('keyTwo.keySix', 'defaultValue'); // output : defaultValue
 
     // insert value
@@ -73,9 +73,9 @@ next you can *check*, *access* or *insert* values with ease.
     // insert value with override
     $dotted->set('keyTwo.keySix', 6);                   // output : 6
 
-    // access values (array content) 
+    // access values (array content)
     $dotted->getValues();
-    /** output : 
+    /** output :
       array:2 [▼
         "keyOne" => "valueOne"
         "keyTwo" => array:3 [▼

@@ -1,0 +1,9 @@
+parameters:
+    level: max
+    checkMissingIterableValueType: false
+    paths:
+        - src/
+        - tests/
+    ignoreErrors:
+        ## i can't find another way to unit test constructor
+        - '#Cannot call method invoke\(\) on ReflectionMethod\|null.#'

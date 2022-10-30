@@ -1,0 +1,12 @@
+#common functions
+mkcd() { mkdir -p "$@" && cd "$_"; }
+
+#common alias
+alias ls='ls -F --color=always' #delete --color=always for mac os and use dedicated snippet
+alias ll='ls -ahl'
+alias cp='cp -iv'
+alias rm='rm -i'
+alias mv='mv -iv'
+alias grep='grep --color=auto -in'
+alias ..='cd ..'
+alias cleanup='cat /dev/null > ~/.bash_history && history -c'
